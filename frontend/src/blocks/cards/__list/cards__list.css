@@ -1,0 +1,26 @@
+.cards__list {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(282px, 1fr));
+  grid-template-rows: repeat(auto-fit, 1fr);
+  align-items: flex-end;
+  gap: 20px 17px;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width:768px) and (max-width:1024px) {
+  .cards__list {
+    max-width: calc(17px + (282px + 282px));
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:767px) {
+  .cards__list {
+    max-width: calc(282px + (19px + 19px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}

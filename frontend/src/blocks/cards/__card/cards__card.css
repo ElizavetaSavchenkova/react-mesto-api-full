@@ -1,0 +1,10 @@
+.cards__card {
+  max-width: 282px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 361px;
+  margin: 0;
+  padding: 0;
+  position:relative;
+}

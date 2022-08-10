@@ -1,0 +1,12 @@
+.login__form-signin {
+  margin: 0;
+  padding: 15px 0 0 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #ffffff;
+  align-self: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}

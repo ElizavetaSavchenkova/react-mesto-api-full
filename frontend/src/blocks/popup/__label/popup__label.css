@@ -1,0 +1,19 @@
+.popup__label {
+  margin: 0;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 358px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+
+@media screen and (max-width:767px) {
+  .popup__label {
+    padding: 0;
+    width: 238px;
+
+  }
+}

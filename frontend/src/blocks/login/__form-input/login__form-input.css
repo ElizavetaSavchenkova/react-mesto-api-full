@@ -1,0 +1,18 @@
+.login__form-input {
+  margin: 0 auto;
+  padding: 0 0 13px 0;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  background-color: #000000;
+  width: 358px;
+  border: 0;
+  border-bottom: 2px solid #CCCCCC;
+  color: #ffffff;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.login__form-input::placeholder {
+  color: #CCCCCC;
+}

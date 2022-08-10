@@ -1,0 +1,10 @@
+.login__form-input-error {
+  padding: 5px 0 0 0;
+  margin: 0;
+  display: block;
+  height: 30px;
+  width: 358px;
+  background-color: black;
+  align-self: center;
+  color: #ffffff;
+}

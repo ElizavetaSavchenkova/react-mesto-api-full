@@ -1,0 +1,7 @@
+.login {
+  margin: 0 auto 13px;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  background-color: black;
+}
