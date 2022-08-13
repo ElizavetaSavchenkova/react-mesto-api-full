@@ -36,5 +36,5 @@ app.use(errors());
 app.use(errorVision);
 
 app.listen(PORT, () => {
-  console.log('Сервер работает корректно');
+  console.log('Сервер работает корректно(папка backend)');
 });
