@@ -87,7 +87,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.mestoliza.students.nomoredomains.sbs',
+  url: 'https://api.mestolns.sbs',
   headers: {
     'Content-Type': 'application/json'
   }
