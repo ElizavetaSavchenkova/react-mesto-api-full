@@ -1,4 +1,4 @@
-export const url = 'https://aoredomains.sbs';
+export const url = 'https://api.mestoliza.students.nomoredomains.sbs';
 
 
 function checkResponse(res){
