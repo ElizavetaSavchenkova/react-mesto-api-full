@@ -1,4 +1,4 @@
-export const url = 'https://auth.nomoreparties.co';
+export const url = '//api.mestoliza.students.nomoredomains.sbs';
 
 
 function checkResponse(res){
