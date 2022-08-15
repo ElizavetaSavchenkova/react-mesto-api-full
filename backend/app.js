@@ -15,12 +15,8 @@ const { PORT = 3000 } = process.env;
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const routerUsers = require('./routes/users');
-const routerCards = require('./routes/cards');
 
 app.post('/signup', validateCreateNewUser, createNewUser);
 app.post('/signin', validateUserLogin, login);
