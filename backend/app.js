@@ -2,14 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const cookieParser = require('cookie-parser');
 
 const auth = require('./middlewares/auth');
-
-
-
 const {requestLogger, errorLogger} = require('./middlewares/logger');
 
-const cors = require('./middlewares/cors');
 
 const { validateCreateNewUser, validateUserLogin } = require('./middlewares/validate');
 const { createNewUser, login } = require('./controllers/users');
@@ -19,7 +16,6 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
 const { PORT = 3000 } = process.env;
-
 
 app.use(express.json());
 app.use(bodyParser.json());
