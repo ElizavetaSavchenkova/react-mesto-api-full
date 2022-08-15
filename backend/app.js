@@ -12,8 +12,8 @@ const { errorVision } = require('./middlewares/errorVision');
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
-const { PORT = 3001 } = process.env;
-app.use(cors);
+const { PORT = 3000 } = process.env;
+
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
