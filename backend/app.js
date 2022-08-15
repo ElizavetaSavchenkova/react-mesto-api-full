@@ -2,11 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cookieParser = require('cookie-parser');
-
 const auth = require('./middlewares/auth');
-const {requestLogger, errorLogger} = require('./middlewares/logger');
-
 
 const { validateCreateNewUser, validateUserLogin } = require('./middlewares/validate');
 const { createNewUser, login } = require('./controllers/users');
@@ -20,8 +16,8 @@ const { PORT = 3000 } = process.env;
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(requestLogger);
+//app.use(cookieParser());
+
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
@@ -39,7 +35,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(errorLogger);
 app.use(errors());
 app.use(errorVision);
 
