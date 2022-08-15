@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+
 const auth = require('./middlewares/auth');
 
-const cookieParser = require('cookie-parser');
+
+
 const {requestLogger, errorLogger} = require('./middlewares/logger');
 
 const cors = require('./middlewares/cors');
@@ -18,13 +20,12 @@ const NotFoundError = require('./errors/NotFoundError');
 const app = express();
 const { PORT = 3000 } = process.env;
 
-app.use(cors);
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(requestLogger);
-
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');
