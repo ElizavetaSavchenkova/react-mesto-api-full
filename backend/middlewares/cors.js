@@ -19,7 +19,7 @@ const allowedCors = [
   'https://localhost:3000',
 ];
 
-const corsHandler = (req, res, next) => {
+module.exports = (req, res, next) => {
   const DEF_METH = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const { origin } = req.headers;
   const { method } = req;
