@@ -87,9 +87,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-40',
+  url: '//localhost:3001',
   headers: {
-    authorization: '109c2e52-7f95-443b-8943-4438d34487f3',
     "content-type": "application/json"
   }
 });

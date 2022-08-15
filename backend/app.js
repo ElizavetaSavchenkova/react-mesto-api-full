@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 
 const { validateCreateNewUser, validateUserLogin } = require('./middlewares/validate');
 const { createNewUser, login } = require('./controllers/users');
@@ -11,7 +12,8 @@ const { errorVision } = require('./middlewares/errorVision');
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
+app.use(cors);
 
 const routerUsers = require('./routes/users');
 const routerCards = require('./routes/cards');

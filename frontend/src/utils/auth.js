@@ -1,4 +1,4 @@
-export const url = 'https://auth.nomoreparties.co';
+export const url = '//localhost:3001';
 
 
 function checkResponse(res){
