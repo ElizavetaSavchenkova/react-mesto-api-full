@@ -87,9 +87,10 @@ class Api {
 }
 
 const api = new Api({
-  url:'//api.mestoliza.students.nomoredomains.sbs',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-40',
   headers: {
-    'Content-Type': 'application/json'
+    authorization: '109c2e52-7f95-443b-8943-4438d34487f3',
+    "content-type": "application/json"
   }
 });
 
