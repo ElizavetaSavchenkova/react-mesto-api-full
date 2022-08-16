@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const { errors } = require('celebrate');
-
+//const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { createNewUser, login } = require('./controllers/users');
 const { errorVision } = require('./middlewares/errorVision');
 const auth = require('./middlewares/auth');
@@ -22,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+//app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -42,7 +43,7 @@ app.use((req, res, next) => {
   next(new NotFoundError('Указанная страница не найдена'));
 });
 
-
+//app.use(errorLogger);
 app.use(errors());
 app.use(errorVision);
 
