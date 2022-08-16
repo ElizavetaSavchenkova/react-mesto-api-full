@@ -47,20 +47,6 @@ class Api {
     }).then((res) => this._checkResponse(res));
   }
 
-  //addNewLikes(cardId) {
-  //return fetch(`${this._url}/cards/likes/${cardId}`, {
-  //  method: 'PUT',
-  //  headers: this._headers
-  // }).then((res) => this._checkResponse(res));
-  //}
-
-  //deleteLikes(cardId) {
-  //  return fetch(`${this._url}/cards/likes/${cardId}`, {
-  //   method: 'DELETE',
-  //   headers: this._headers
-  // }).then((res) => this._checkResponse(res));
-  //}
-
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
@@ -78,19 +64,20 @@ class Api {
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-      return fetch(`${this._url}/cards/likes/${cardId}`, {
-        method: `${isLiked ? 'PUT' : 'DELETE'}`,
-        headers: this._headers,
-      }).then(this._checkResponse);
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
+      headers: this._headers,
+    }).then(this._checkResponse);
 
   }
 }
 
-const api = new Api({
-  url: 'https://api.mestoliza.students.nomoredomains.sbs',
-  headers: {
-    "content-type": "application/json"
-  }
+const api = new Api ({
+    url: 'https://api.mestoliza.students.nomoredomains.sbs',
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('jwt')}`
+    }
 });
 
 export default api;

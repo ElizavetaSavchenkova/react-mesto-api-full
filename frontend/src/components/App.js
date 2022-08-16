@@ -40,6 +40,32 @@ function App() {
       });
   }, []);
 
+
+  function tokenCheck() {
+    const userToken = localStorage.getItem('jwt');
+    if (userToken) {
+      auth.getInfoToken(userToken)
+        .then((data) => {
+          setLoggedIn(true);
+          setEmail(data.data.email);
+          history.push('/');
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  //useEffect(() => {
+    //if (loggedIn) {
+    //  history.push('/')
+    //}
+  //}, [loggedIn]);
+
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -120,19 +146,6 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    const userToken = localStorage.getItem('jwt');
-    if (userToken) {
-      auth.getInfoToken(userToken)
-        .then((data) => {
-          setLoggedIn(true);
-          setEmail(data.data.email);
-          history.push('/');
-        }).catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [history]);
 
   function handleRegister(email, password) {
     auth.registerUser(email, password)
@@ -210,5 +223,3 @@ function App() {
 }
 
 export default App;
-
-

@@ -1,5 +1,6 @@
 export const url = 'https://api.mestoliza.students.nomoredomains.sbs';
 
+
 function checkResponse(res){
   if (res.ok) {
     return res.json();
