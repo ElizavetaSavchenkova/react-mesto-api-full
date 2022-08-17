@@ -29,7 +29,7 @@ function App() {
   const [infoMessage, setInfoMessage] = useState(false);
   const history = useHistory();
 
-  useEffect(() => {
+   useEffect(() => {
     Promise.all([api.getUserInformation(), api.getAllCards()])
       .then(([data, cards]) => {
         setCurrentUser(data);
@@ -40,30 +40,75 @@ function App() {
       });
   }, []);
 
+  //useEffect(() => {
+   // if (loggedIn) {
+    //  api
+      //  .getUserInformation()
+      //  .then((user) => {
+      //    setCurrentUser(user);
+      //    console.log(user)
+     //   })
+       // .catch((err) => console.log("Ошибка получения пользователя" + err));
+//
+    //  api
+      //  .getAllCards()
+      //  .then((cards) => {
+       //   setCards(cards);
+      //    console.log(cards)
+      //  })
+        //.catch((err) => console.log("Ошибка получения карточек" + err));
+   // }
+  //}, [loggedIn]);
 
-  function tokenCheck() {
-    const userToken = localStorage.getItem('jwt');
-    if (userToken) {
-      auth.getInfoToken(userToken)
-        .then((data) => {
-          setLoggedIn(true);
-          setEmail(data.data.email);
-          history.push('/');
-        }).catch((err) => {
-          console.log(err);
-        });
-    }
-  }
+  //useEffect(() => {
+   // const userToken = localStorage.getItem('token');
+    //if (userToken) {
+    //  auth.getInfoToken(userToken)
+       // .then((data) => {
+       //   if (data) {
+         //   setLoggedIn(true);
+         //   setEmail(data.data.email);
+         //   console.log(data);
+          //  console.log(userToken)
+         // }
 
-  useEffect(() => {
-    tokenCheck();
-  }, []);
+        //}).catch(err => console.log(`Токен отсутствует (useeffect front app.js): ${err}`))
+    //}
+ // }, [])
+
+
+
+ // useEffect(() => {
+    //const userToken = localStorage.getItem('jwt');
+    //if (userToken) {
+    //  auth.getInfoToken(userToken)
+    //    .then((data) => {
+     //     setLoggedIn(true);
+         // setEmail(data.data.email);
+     //     history.push('/');
+     //   }).catch((err) => {
+     //     console.log(err);
+     //   });
+   // }
+ // }, [history]);
 
   //useEffect(() => {
     //if (loggedIn) {
-    //  history.push('/')
-    //}
-  //}, [loggedIn]);
+     // Promise.all([api.getUserInformation(), api.getAllCards()])
+      //  .then(([data, cards]) => {
+        // setCurrentUser(data.user)
+        //  setCards(cards)
+       // })
+       // .catch(err => console.log(`Ошибка при изначальной отрисовке данных: ${err}`));
+   // }
+ // }, [loggedIn])
+
+  //useEffect(() => {
+  //  if (loggedIn) {
+   //   console.log(loggedIn)
+    // history.push('/')
+  //  }
+ // }, [loggedIn])
 
 
   function handleEditAvatarClick() {
@@ -130,6 +175,7 @@ function App() {
     api.editAvatar(avatar)
       .then((data) => {
         setCurrentUser(data);
+        console.log(data)
         closeAllPopups();
       }).catch((err) => {
         console.log(err);
@@ -138,6 +184,7 @@ function App() {
 
   function handleAddPlace({ name, link }) {
     api.addCard(name, link)
+    console.log(name, link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -166,7 +213,12 @@ function App() {
   function handleLogin({ email, password }) {
     auth.authorizeUser({ email, password })
       .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+        }
         localStorage.setItem('jwt', res.token);
+        console.log(res.token);
+        console.log('jwt')
         setLoggedIn(true);
         setEmail(email);
         history.push('/');
@@ -174,6 +226,7 @@ function App() {
         console.log(err);
         handleInfoTooltipOpen();
         setInfoMessage(false);
+        console.log("Ошибка авторизации" + err);
       })
   }
 
@@ -183,6 +236,25 @@ function App() {
     setEmail('');
     history.push('/sign-in');
   }
+
+  //useEffect(() => {
+  //  const jwt = localStorage.getItem("jwt");
+    //if (jwt) {
+    //  auth
+     //   .getInfoToken(jwt)
+       // .then((res) => {
+      //    setEmail(res.email);
+        //  setLoggedIn(true);
+         // history.push("/");
+        //})
+       // .catch(() => {
+        //  localStorage.removeItem("jwt");
+       // });
+    //} else {
+      //setLoggedIn(false);
+      //history.push("/sign-in");
+    //}
+  //}, [history]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -223,3 +295,5 @@ function App() {
 }
 
 export default App;
+
+

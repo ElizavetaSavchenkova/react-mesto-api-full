@@ -1,13 +1,11 @@
 export const url = 'https://api.mestoliza.students.nomoredomains.sbs';
 
-
 function checkResponse(res){
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  return Promise.reject(`Ошибка auth utlis frontend: ${res.status}`);
 }
-
 
 export const registerUser = ({email, password}) => {
   return fetch(`${url}/signup`, {
@@ -32,13 +30,11 @@ export const authorizeUser = ({email, password}) => {
   }).then(checkResponse);
 }
 
-export const getInfoToken = (token) => {
+export const getInfoToken = (jwt) => {
   return fetch(`${url}/users/me`, {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
   }).then(checkResponse);
 };
