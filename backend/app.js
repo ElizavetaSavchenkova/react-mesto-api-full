@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   next(new NotFoundError('Указанная страница не найдена'));
 });
 
-//app.use(errorLogger);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorVision);
 
