@@ -14,7 +14,7 @@ const { validateCreateNewUser, validateUserLogin } = require('./middlewares/vali
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 //не забудь поменять тут
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {

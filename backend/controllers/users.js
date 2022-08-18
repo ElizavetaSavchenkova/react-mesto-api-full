@@ -21,6 +21,7 @@ const getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       res.status(200).send({ data: user });
+      console.log({ data: user });
     })
     .catch(next);
 };
@@ -85,13 +86,15 @@ const login = (req, res, next) => {
 
 const updateProfile = (req, res, next) => {
   const { name, about } = req.body;
+  console.log(name, about);
   User.findOneAndUpdate({ id: req.user._id }, { name, about }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден. Не удалось обновить информацию'));
         return;
       }
-      res.send({ user });
+      res.send({ name, about });
+      console.log(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

@@ -1,6 +1,7 @@
 class Api {
   constructor(config) {
     this._url = config.url;
+    this._headers = config.headers;
   }
 
   _checkResponse(res) {
@@ -58,20 +59,6 @@ class Api {
     }).then((res) => this._checkResponse(res));
   }
 
-  //addNewLikes(cardId) {
-  //return fetch(`${this._url}/cards/likes/${cardId}`, {
-  //  method: 'PUT',
-  //  headers: this._headers
-  // }).then((res) => this._checkResponse(res));
-  //}
-
-  //deleteLikes(cardId) {
-  //  return fetch(`${this._url}/cards/likes/${cardId}`, {
-  //   method: 'DELETE',
-  //   headers: this._headers
-  // }).then((res) => this._checkResponse(res));
-  //}
-
   deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
@@ -107,7 +94,7 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://api.mestoliza.students.nomoredomains.sbs',
+  url: 'http://localhost:3001',
   headers: {
     "content-type": "application/json"
   }

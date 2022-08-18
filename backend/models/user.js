@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-
 const AuthError = require('../errors/AuthError');
 
 const userSchema = new mongoose.Schema({
@@ -9,13 +8,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: [2, 'Имя пользователя должно содержать не менее 2-ух символов'],
     maxlength: [30, 'Имя пользователя должно содержать не более 30-ти символов'],
-    default: 'Жак-Ив Кусто',
+    default: 'Дефолт',
   },
   about: {
     type: String,
     minlength: [2, 'Поле должно содержать не менее 2-ух символов'],
     maxlength: [30, 'Поле должно содержать не более 30-ти символов'],
-    default: 'Исследователь',
+    default: 'Дефолт',
   },
   avatar: {
     type: String,

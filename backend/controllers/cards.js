@@ -10,16 +10,22 @@ const getAllCards = (req, res, next) => {
   Card.find({})
     .then((card) => {
       res.send({ card });
+      console.log('Карточки с сервера стянул');
     })
     .catch(next);
 };
 
 const createNewCard = (req, res, next) => {
+  console.log('Привет');
+  console.log('createNewCard');
   const { name, link } = req.body;
   const owner = req.user._id;
+  //console.log('createNewCard');
   Card.create({ owner, name, link })
     .then((card) => {
+      console.log('createNewCard: created');
       res.status(created).send({ card });
+      console.log('createNewCard: sended response');
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
