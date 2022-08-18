@@ -86,16 +86,9 @@ const login = (req, res, next) => {
 
 const updateProfile = (req, res, next) => {
   const { name, about } = req.body;
-  console.log(name, about);
-  User.findOneAndUpdate({ id: req.user._id }, { name, about }, { new: true, runValidators: true })
-    .then((user) => {
-      if (!user) {
-        next(new NotFoundError('Пользователь не найден. Не удалось обновить информацию'));
-        return;
-      }
-      res.send({ name, about });
-      console.log(user);
-    })
+  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+    .orFail(() => next(new NotFoundError('Пользователь не найден. Не удалось обновить информацию')))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Указаны некорректные данные при обновлении пользователя'));
@@ -104,6 +97,7 @@ const updateProfile = (req, res, next) => {
       }
     });
 };
+
 
 const updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;

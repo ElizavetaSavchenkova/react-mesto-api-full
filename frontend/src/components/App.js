@@ -31,12 +31,13 @@ function App() {
 
 
   useEffect(() => {
-  Promise.all([api.getUserInformation(), api.getAllCards()])
+  Promise.all([api.getUserInformation(), api.getAllCards([])])
     .then(([data, cards]) => {
       setCurrentUser(data.data);
       console.log(data.data);
       setCards(cards.card)
-      //console.log(data);
+      console.log(cards.card);
+      //console.log(card.name)
       console.log ('Массив общих карточек выводится')
       console.log('Информация о пользователе выводится')
       console.log('Информация о пользователе - ' + data.data.name, data.data.about, data.data.avatar)
