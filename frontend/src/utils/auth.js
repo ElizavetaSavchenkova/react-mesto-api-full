@@ -1,4 +1,4 @@
-export const url = 'http://localhost:3001';
+export const url = 'https://api.mestoliza.students.nomoredomains.sbs';
 
 
 function checkResponse(res){
