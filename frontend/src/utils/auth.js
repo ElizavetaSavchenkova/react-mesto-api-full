@@ -1,15 +1,13 @@
 export const url = 'https://api.mestoliza.students.nomoredomains.sbs';
 
-
-function checkResponse(res){
+function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-
-export const registerUser = ({email, password}) => {
+export const registerUser = ({ email, password }) => {
   return fetch(`${url}/signup`, {
     method: 'POST',
     headers: {
@@ -21,7 +19,7 @@ export const registerUser = ({email, password}) => {
 
 };
 
-export const authorizeUser = ({email, password}) => {
+export const authorizeUser = ({ email, password }) => {
   return fetch(`${url}/signin`, {
     method: 'POST',
     headers: {

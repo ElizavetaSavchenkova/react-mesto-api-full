@@ -17,17 +17,12 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser._id;
-  console.log(card.owner)
-  console.log(currentUser._id);
   const cardDeleteButtonClassName = (
     `cards__delete-button ${isOwn ? 'cards__delete-button_visible' : 'cards__delete-button_hidden'}`
   );
 
   const isLiked = card.likes.some(user => user === currentUser._id);
-  console.log(isLiked);
-  //console.log(user)
   const cardLikeButtonClassName = `cards__likes-button ${isLiked ? 'cards__likes-button_active' : ''}`;
-  console.log(cardLikeButtonClassName)
 
   return (
     <li className="cards__card">

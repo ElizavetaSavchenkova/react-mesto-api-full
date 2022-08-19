@@ -34,18 +34,10 @@ function App() {
     Promise.all([api.getUserInformation(), api.getAllCards([])])
       .then(([data, cards]) => {
         setCurrentUser(data.data);
-        console.log(data.data);
-        setCards(cards.card)
-        console.log(cards.card);
-        //console.log(card.name)
-        console.log('Массив общих карточек выводится')
-        console.log('Информация о пользователе выводится')
-        console.log('Информация о пользователе - ' + data.data.name, data.data.about, data.data.avatar)
+        setCards(cards.card.reverse())
       })
       .catch((err) => {
         console.log(err);
-        console.log('Карточки не выводятся')
-        console.log('Информация о пользователе не ыводится')
       });
   }, [loggedIn]);
 
@@ -74,24 +66,16 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
-    console.log(card);
   }
 
   function handleCardLike(card) {
-    console.log('Начинает работу handleCardLike')
     const isLiked = card.likes.some(i => i === currentUser._id)
-    console.log(card.likes.length)
-    console.log(card._id)
-    console.log(isLiked)
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard.card : c))
-        console.log(cards);
-        console.log(card._id)
-        console.log(newCard)
+
       }).catch((err) => {
-        console.log('Ломаюсь на handleCardLike' + err);
-        console.log('Не могу поставить лайк.Фронт')
+        console.log(err);
       });
   }
 
@@ -111,12 +95,9 @@ function App() {
         editedUserInfo.name = name;
         editedUserInfo.about = about;
         setCurrentUser({ ...editedUserInfo });
-        console.log(name, about)
-        console.log('Информация о юзере обновляется. Фронт')
         closeAllPopups();
       }).catch((err) => {
         console.log(err);
-        console.log('Ошибка обновления')
       });
   }
 
@@ -124,8 +105,6 @@ function App() {
     api.editAvatar(avatar)
       .then((data) => {
         setCurrentUser(data);
-        console.log(data);
-        console.log('Аватар обновился. Фронт')
         closeAllPopups();
       }).catch((err) => {
         console.log(err);
@@ -136,11 +115,9 @@ function App() {
     api.addCard(name, link)
       .then((newCard) => {
         setCards([newCard.card, ...cards]);
-        console.log('Карточка добавилась. Фронт')
         closeAllPopups();
       }).catch((err) => {
         console.log(err);
-        console.log('Карточка не добавилась.Фронт')
       });
   }
 
@@ -152,10 +129,8 @@ function App() {
           setLoggedIn(true);
           setEmail(data.data.email);
           history.push('/');
-          console.log('Токен считался.Фронт')
         }).catch((err) => {
           console.log(err);
-          console.log('Токен не считался. Фронт')
         });
     }
   }, [loggedIn, history]);
@@ -167,14 +142,12 @@ function App() {
           handleInfoTooltipOpen();
           setInfoMessage(true);
           history.push('/sign-in');
-          console.log('Зарегался.Фронт')
         }
       }).catch((err) => {
         console.log(err);
         setLoggedIn(false);
         handleInfoTooltipOpen();
         setInfoMessage(false);
-        console.log('Не зарегался.Фронт')
       });
   }
 
@@ -185,13 +158,10 @@ function App() {
         setLoggedIn(true);
         setEmail(email);
         history.push('/');
-        console.log('Залогинился. Фронт')
-        console.log('Токен после логина -' + res.token)
       }).catch((err) => {
         console.log(err);
         handleInfoTooltipOpen();
         setInfoMessage(false);
-        console.log('Не залогинился. Фронт')
       })
   }
 
@@ -200,7 +170,6 @@ function App() {
     setLoggedIn(false);
     setEmail('');
     history.push('/sign-in');
-    console.log('Вышел из аккаунта. Фронт')
   }
 
   return (
