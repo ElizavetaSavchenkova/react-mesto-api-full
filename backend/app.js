@@ -1,7 +1,5 @@
 require('dotenv').config();
 
-console.log(process.env);
-
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -16,7 +14,7 @@ const { validateCreateNewUser, validateUserLogin } = require('./middlewares/vali
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express();
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
