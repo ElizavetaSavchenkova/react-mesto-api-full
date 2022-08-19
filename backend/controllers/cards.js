@@ -63,19 +63,22 @@ const deleteCard = (req, res, next) => {
 };
 
 const likeCard = (req, res, next) => {
-  Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
-    { new: true },
-  )
-    .orFail(() => next(new NotFoundError('Передан несуществующий _id карточки')))
-    .then((card) => res.send(card))
+  console.log('Начинает работу likeCard');
+  Card.findByIdAndUpdate(req.params.cardId, { $addToSet: { likes: req.user._id } }, { new: true })
+    .then((card) => {
+      if (!card) {
+        next(new NotFoundError('Карточка с указанным id не найдена'));
+        return;
+      }
+      res.send({ card });
+      console.log(card);
+    })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные для постановки лайка'));
-      } else {
-        next(err);
+        next(new BadRequestError('Данные для постановки лайка некорректны'));
+        return;
       }
+      next(err);
     });
 };
 

@@ -31,23 +31,23 @@ function App() {
 
 
   useEffect(() => {
-  Promise.all([api.getUserInformation(), api.getAllCards([])])
-    .then(([data, cards]) => {
-      setCurrentUser(data.data);
-      console.log(data.data);
-      setCards(cards.card)
-      console.log(cards.card);
-      //console.log(card.name)
-      console.log ('Массив общих карточек выводится')
-      console.log('Информация о пользователе выводится')
-      console.log('Информация о пользователе - ' + data.data.name, data.data.about, data.data.avatar)
-    })
-    .catch((err) => {
-      console.log(err);
-      console.log('Карточки не выводятся')
-      console.log('Информация о пользователе не ыводится')
-    });
-}, [loggedIn]);
+    Promise.all([api.getUserInformation(), api.getAllCards([])])
+      .then(([data, cards]) => {
+        setCurrentUser(data.data);
+        console.log(data.data);
+        setCards(cards.card)
+        console.log(cards.card);
+        //console.log(card.name)
+        console.log('Массив общих карточек выводится')
+        console.log('Информация о пользователе выводится')
+        console.log('Информация о пользователе - ' + data.data.name, data.data.about, data.data.avatar)
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('Карточки не выводятся')
+        console.log('Информация о пользователе не ыводится')
+      });
+  }, [loggedIn]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -74,16 +74,23 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
+    console.log(card);
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log('Начинает работу handleCardLike')
+    const isLiked = card.likes.some(i => i === currentUser._id)
+    console.log(card.likes.length)
+    console.log(card._id)
     console.log(isLiked)
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.card : c))
+        console.log(cards);
+        console.log(card._id)
+        console.log(newCard)
       }).catch((err) => {
-        console.log(err);
+        console.log('Ломаюсь на handleCardLike' + err);
         console.log('Не могу поставить лайк.Фронт')
       });
   }
@@ -105,7 +112,7 @@ function App() {
         editedUserInfo.about = about;
         setCurrentUser({ ...editedUserInfo });
         console.log(name, about)
-        console.log ('Информация о юзере обновляется. Фронт')
+        console.log('Информация о юзере обновляется. Фронт')
         closeAllPopups();
       }).catch((err) => {
         console.log(err);
