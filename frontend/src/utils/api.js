@@ -17,7 +17,7 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
     }).then((res) => this._checkResponse(res));
   }
 
@@ -27,7 +27,7 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
     }).then((res) => this._checkResponse(res));
   }
 
@@ -37,7 +37,7 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
       body: JSON.stringify({
         name,
         about,
@@ -51,7 +51,7 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
       body: JSON.stringify({
         name,
         link
@@ -65,7 +65,7 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
     }).then((res) => this._checkResponse(res));
   }
 
@@ -75,20 +75,20 @@ class Api {
       headers: {
         authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
-    },
+      },
       body: JSON.stringify
         ({ avatar }),
     }).then((res) => this._checkResponse(res));
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-      return fetch(`${this._url}/cards/likes/${cardId}`, {
-        method: `${isLiked ? 'PUT' : 'DELETE'}`,
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          "Content-Type": "application/json",
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        "Content-Type": "application/json",
       },
-      }).then(this._checkResponse);
+    }).then(this._checkResponse);
 
   }
 }

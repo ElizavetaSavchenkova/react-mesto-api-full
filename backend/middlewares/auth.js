@@ -11,10 +11,12 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
+  console.log(token);
   let payload;
 
   try {
     payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'dev-secret');
+    console.log(payload);
   } catch (err) {
     next(new AuthError('Необходимо пройти авторизацию'));
     return;
