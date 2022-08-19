@@ -17,7 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build"
+    "predeploy": "react-scripts build",
+    "deploy": "npm run build && scp -r ./build/* liza@62.84.125.100:/home/liza/frontend",
+
   },
   "eslintConfig": {
     "extends": [
