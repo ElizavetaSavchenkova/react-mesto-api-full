@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
-  console.log(token);
+
   let payload;
 
   try {
